@@ -1,5 +1,7 @@
 #load "packages/FsLab/FsLab.fsx"
 
+#load "packages/MathNet.Numerics.FSharp/MathNet.Numerics.fsx"
+
 open FsLab
 open Deedle
 open FSharp.Data

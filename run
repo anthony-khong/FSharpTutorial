@@ -5,30 +5,23 @@ function build-docker() {
 }
 
 function dock() {
-    docker run --rm -v "$PWD":"/root/FSharpTutorial" -it fsharp $@
+    docker run --rm -v "$PWD":"/root/FSharpTutorial" \
+        -w "/root/FSharpTutorial" \
+        -it fsharp $@
 }
-
 
 function install-paket() {
     mkdir .paket
     curl -L https://github.com/fsprojects/Paket/releases/download/5.194.0/paket.bootstrapper.exe -o .paket/paket.bootstrapper.exe
     mono .paket/paket.bootstrapper.exe
     echo ".paket/paket.exe" >> .gitignore
-
+    echo ".packages" >> .gitignore
+    mono .paket/paket.exe install
 }
 
-function init-project() {
-    dotnet new console
-    dotnet restore
-    dotnet build
-    dotnet run
-}
-
-function install-fslab() {
-    mkdir -p packages
-    dotnet add package FsLab --version 1.1.6 --package-directory packages
-    dotnet add package Deedle --version 1.2.5 --package-directory packages
-    dotnet add package FSharp.Data --version 3.0.0 --package-directory packages
+function install-mathnet-numerics() {
+    mono nuget.exe update -self
+    mono nuget.exe install MathNet.Numerics.FSharp -Pre -OutputDirectory packages
 }
 
 
