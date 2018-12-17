@@ -1,1 +1,3 @@
-/Users/akhong/dotfiles/docker/Dockerfile-fsharp
+FROM fsharp:netcore
+
+MAINTAINER Anthony Khong <anthony.kusumo.khong@gmail.com>
